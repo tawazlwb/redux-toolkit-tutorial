@@ -1,8 +1,10 @@
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { removeItem } from '../features/cart/cartSlice'
 import { ChevronDown, ChevronUp } from '../icons'
 
 export const CartItem = ({ id, title, price, img, amount }) => {
   // const { amount } = useSelector((store) => store.cart)
+  const dispatch = useDispatch()
 
   return (
     <article className='cart-item'>
@@ -10,7 +12,14 @@ export const CartItem = ({ id, title, price, img, amount }) => {
       <div>
         <h4>{title}</h4>
         <h4 className='item-price'>${price}</h4>
-        <button className='remove-btn'>remove</button>
+        <button
+          className='remove-btn'
+          onClick={() => {
+            dispatch(removeItem(id))
+          }}
+        >
+          remove
+        </button>
       </div>
       <div>
         <button className='amount-btn'>
